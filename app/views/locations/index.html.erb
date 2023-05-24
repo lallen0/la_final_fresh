@@ -1,0 +1,102 @@
+<div>
+  <div>
+    <h1>
+      List of all locations
+    </h1>
+  </div>
+</div>
+
+<hr>
+
+<div>
+  <div>
+    <h2>
+      Add a new location
+    </h2>
+
+    <form action="/insert_location" method="post">
+      <div>
+        <label for="description_box">
+          Description
+        </label>
+
+        <input type="text" id="description_box" name="query_description">
+      </div>
+
+      <div>
+        <label for="courts_count_box">
+          Courts count
+        </label>
+
+        <input type="text" id="courts_count_box" name="query_courts_count">
+      </div>
+
+      <button>
+        Create location
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
+<div>
+  <div>
+    <table border="1">
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          Description
+        </th>
+
+        <th>
+          Courts count
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @list_of_locations.each do |a_location| %>
+      <tr>
+        <td>
+          <%= a_location.id %>
+        </td>
+
+        <td>
+          <%= a_location.description %>
+        </td>
+
+        <td>
+          <%= a_location.courts_count %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(a_location.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(a_location.updated_at) %> ago
+        </td>
+
+        <td>
+          <a href="/locations/<%= a_location.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>
