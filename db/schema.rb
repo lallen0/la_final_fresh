@@ -10,6 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 2023_05_24_142821) do
+
+  create_table "timeslots", force: :cascade do |t|
+    t.integer "court_id"
+    t.boolean "available"
+    t.date "date"
+    t.time "time"
+    t.integer "reserver_id"
+    t.datetime "reserved_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
 end

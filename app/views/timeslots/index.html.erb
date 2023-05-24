@@ -1,0 +1,164 @@
+<div>
+  <div>
+    <h1>
+      List of all timeslots
+    </h1>
+  </div>
+</div>
+
+<hr>
+
+<div>
+  <div>
+    <h2>
+      Add a new timeslot
+    </h2>
+
+    <form action="/insert_timeslot" method="post">
+      <div>
+        <label for="court_id_box">
+          Court
+        </label>
+
+        <input type="text" id="court_id_box" name="query_court_id">
+      </div>
+
+      <div>
+        <input type="checkbox" id="available_box" name="query_available" value="1">
+
+        <label for="available_box">Available</label>
+      </div>
+
+      <div>
+        <label for="date_box">
+          Date
+        </label>
+
+        <input type="date" id="date_box" name="query_date">
+      </div>
+
+      <div>
+        <label for="time_box">
+          Time
+        </label>
+
+        <input type="time" id="time_box" name="query_time">
+      </div>
+
+      <div>
+        <label for="reserver_id_box">
+          Reserver
+        </label>
+
+        <input type="text" id="reserver_id_box" name="query_reserver_id">
+      </div>
+
+      <div>
+        <label for="reserved_at_box">
+          Reserved at
+        </label>
+
+        <input type="datetime-local" id="reserved_at_box" name="query_reserved_at">
+      </div>
+
+      <button>
+        Create timeslot
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
+<div>
+  <div>
+    <table border="1">
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          Court
+        </th>
+
+        <th>
+          Available
+        </th>
+
+        <th>
+          Date
+        </th>
+
+        <th>
+          Time
+        </th>
+
+        <th>
+          Reserver
+        </th>
+
+        <th>
+          Reserved at
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @list_of_timeslots.each do |a_timeslot| %>
+      <tr>
+        <td>
+          <%= a_timeslot.id %>
+        </td>
+
+        <td>
+          <%= a_timeslot.court_id %>
+        </td>
+
+        <td>
+          <%= a_timeslot.available %>
+        </td>
+
+        <td>
+          <%= a_timeslot.date %>
+        </td>
+
+        <td>
+          <%= a_timeslot.time %>
+        </td>
+
+        <td>
+          <%= a_timeslot.reserver_id %>
+        </td>
+
+        <td>
+          <%= a_timeslot.reserved_at %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(a_timeslot.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(a_timeslot.updated_at) %> ago
+        </td>
+
+        <td>
+          <a href="/timeslots/<%= a_timeslot.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>

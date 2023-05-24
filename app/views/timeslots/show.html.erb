@@ -1,0 +1,147 @@
+<div>
+  <div>
+    <h1>
+      Timeslot #<%= @the_timeslot.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/timeslots">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_timeslot/<%= @the_timeslot.id %>">
+          Delete timeslot
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        Court
+      </dt>
+      <dd>
+        <%= @the_timeslot.court_id %>
+      </dd>
+
+      <dt>
+        Available
+      </dt>
+      <dd>
+        <%= @the_timeslot.available %>
+      </dd>
+
+      <dt>
+        Date
+      </dt>
+      <dd>
+        <%= @the_timeslot.date %>
+      </dd>
+
+      <dt>
+        Time
+      </dt>
+      <dd>
+        <%= @the_timeslot.time %>
+      </dd>
+
+      <dt>
+        Reserver
+      </dt>
+      <dd>
+        <%= @the_timeslot.reserver_id %>
+      </dd>
+
+      <dt>
+        Reserved at
+      </dt>
+      <dd>
+        <%= @the_timeslot.reserved_at %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_timeslot.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_timeslot.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit timeslot
+    </h2>
+
+    <form action="/modify_timeslot/<%= @the_timeslot.id %>"  method="post" >
+      <div>
+        <label for="court_id_box">
+          Court
+        </label>
+
+        <input type="text" id="court_id_box" name="query_court_id" value="<%= @the_timeslot.court_id %>">
+      </div>
+
+      <div>
+        <input type="checkbox" id="available_box" name="query_available" value="1" <%= "checked" if @the_timeslot.available %>>
+
+        <label for="available_box">
+            Available
+        </label>
+      </div>
+
+      <div>
+        <label for="date_box">
+          Date
+        </label>
+
+        <input type="date" id="date_box" name="query_date" value="<%= @the_timeslot.date %>">
+      </div>
+
+      <div>
+        <label for="time_box">
+          Time
+        </label>
+
+        <input type="time" id="time_box" name="query_time" value="<%= @the_timeslot.time %>">
+      </div>
+
+      <div>
+        <label for="reserver_id_box">
+          Reserver
+        </label>
+
+        <input type="text" id="reserver_id_box" name="query_reserver_id" value="<%= @the_timeslot.reserver_id %>">
+      </div>
+
+      <div>
+        <label for="reserved_at_box">
+          Reserved at
+        </label>
+
+        <input type="datetime-local" id="reserved_at_box" name="query_reserved_at"
+         value="<%= @the_timeslot.reserved_at %>">
+      </div>
+
+      <button>
+        Update timeslot
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
