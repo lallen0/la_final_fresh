@@ -74,15 +74,11 @@
     <table border="1">
       <tr>
         <th>
-          ID
+          Timeslot ID
         </th>
 
         <th>
           Court
-        </th>
-
-        <th>
-          Available
         </th>
 
         <th>
@@ -94,22 +90,15 @@
         </th>
 
         <th>
+          Available?
+        </th>
+
+        <th>
           Reserver
         </th>
 
         <th>
-          Reserved at
-        </th>
-
-        <th>
-          Created at
-        </th>
-
-        <th>
-          Updated at
-        </th>
-
-        <th>
+         Reserve? 
         </th>
       </tr>
 
@@ -124,37 +113,34 @@
         </td>
 
         <td>
-          <%= a_timeslot.available %>
-        </td>
-
-        <td>
           <%= a_timeslot.date %>
         </td>
 
         <td>
-          <%= a_timeslot.time %>
+            
+          <%= a_timeslot.time.strftime("%-l:%M %p") %>
+        </td>
+
+        <td>
+          <%= a_timeslot.available %>
         </td>
 
         <td>
           <%= a_timeslot.reserver_id %>
         </td>
 
-        <td>
-          <%= a_timeslot.reserved_at %>
-        </td>
+        <% if a_timeslot.available %>
+          <td>
+            <a href="/reserve_timeslot/<%= a_timeslot.id %>">
+              Reserve this court
+            </a>
+          </td>
+        <% else %>
+          <td>
+              Not available
+          </td>
+        <% end %>
 
-        <td>
-          <%= time_ago_in_words(a_timeslot.created_at) %> ago
-        </td>
-        <td>
-          <%= time_ago_in_words(a_timeslot.updated_at) %> ago
-        </td>
-
-        <td>
-          <a href="/timeslots/<%= a_timeslot.id %>">
-            Show details
-          </a>
-        </td>
       </tr>
       <% end %>
     </table>

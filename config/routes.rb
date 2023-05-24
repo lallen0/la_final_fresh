@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
-
+  get("/", { :controller => "timeslots", :action => "index" })
+  
 
   # Routes for the Location resource:
 
@@ -86,6 +87,7 @@ Rails.application.routes.draw do
   # UPDATE
   
   post("/modify_timeslot/:path_id", { :controller => "timeslots", :action => "update" })
+  get("/reserve_timeslot/:path_id", { :controller => "timeslots", :action => "reserve" })
   
   # DELETE
   get("/delete_timeslot/:path_id", { :controller => "timeslots", :action => "destroy" })

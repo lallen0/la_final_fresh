@@ -5,6 +5,8 @@ class TimeslotsController < ApplicationController
     @list_of_timeslots = matching_timeslots.order({ :created_at => :desc })
 
     render({ :template => "timeslots/index.html.erb" })
+
+    
   end
 
   def show
@@ -61,4 +63,22 @@ class TimeslotsController < ApplicationController
 
     redirect_to("/timeslots", { :notice => "Timeslot deleted successfully."} )
   end
+
+
+def reserve
+  the_id = params.fetch("path_id")
+  the_timeslot = Timeslot.where({ :id => the_id }).at(0)
+
+  the_timeslot.available = false
+  the_timeslot.reserver_id = session[:user_id]
+  the_timeslot.reserved_at = Time.now
+
+  if the_timeslot.valid?
+    the_timeslot.save
+    redirect_to("/timeslots", { :notice => "Timeslot reserved successfully."} )
+  else
+    redirect_to("/timeslots", { :alert => the_timeslot.errors.full_messages.to_sentence })
+  end
+end
+
 end
