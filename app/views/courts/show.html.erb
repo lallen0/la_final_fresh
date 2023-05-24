@@ -1,0 +1,86 @@
+<div>
+  <div>
+    <h1>
+      Court #<%= @the_court.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/courts">
+          Go back
+        </a>
+      </div>
+
+      <div>
+        <a href="/delete_court/<%= @the_court.id %>">
+          Delete court
+        </a>
+      </div>
+    </div>
+
+    <dl>
+      <dt>
+        Location
+      </dt>
+      <dd>
+        <%= @the_court.location_id %>
+      </dd>
+
+      <dt>
+        Reservations count
+      </dt>
+      <dd>
+        <%= @the_court.reservations_count %>
+      </dd>
+
+      <dt>
+        Created at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_court.created_at) %> ago
+      </dd>
+
+      <dt>
+        Updated at
+      </dt>
+      <dd>
+        <%= time_ago_in_words(@the_court.updated_at) %> ago
+      </dd>
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+  <div>
+    <h2>
+      Edit court
+    </h2>
+
+    <form action="/modify_court/<%= @the_court.id %>"  method="post" >
+      <div>
+        <label for="location_id_box">
+          Location
+        </label>
+
+        <input type="text" id="location_id_box" name="query_location_id" value="<%= @the_court.location_id %>">
+      </div>
+
+      <div>
+        <label for="reservations_count_box">
+          Reservations count
+        </label>
+
+        <input type="text" id="reservations_count_box" name="query_reservations_count" value="<%= @the_court.reservations_count %>">
+      </div>
+
+      <button>
+        Update court
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>

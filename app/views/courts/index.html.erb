@@ -1,0 +1,102 @@
+<div>
+  <div>
+    <h1>
+      List of all courts
+    </h1>
+  </div>
+</div>
+
+<hr>
+
+<div>
+  <div>
+    <h2>
+      Add a new court
+    </h2>
+
+    <form action="/insert_court" method="post">
+      <div>
+        <label for="location_id_box">
+          Location
+        </label>
+
+        <input type="text" id="location_id_box" name="query_location_id">
+      </div>
+
+      <div>
+        <label for="reservations_count_box">
+          Reservations count
+        </label>
+
+        <input type="text" id="reservations_count_box" name="query_reservations_count">
+      </div>
+
+      <button>
+        Create court
+      </button>
+    </form>
+  </div>
+</div>
+
+<hr>
+<div>
+  <div>
+    <table border="1">
+      <tr>
+        <th>
+          ID
+        </th>
+
+        <th>
+          Location
+        </th>
+
+        <th>
+          Reservations count
+        </th>
+
+        <th>
+          Created at
+        </th>
+
+        <th>
+          Updated at
+        </th>
+
+        <th>
+        </th>
+      </tr>
+
+      <% @list_of_courts.each do |a_court| %>
+      <tr>
+        <td>
+          <%= a_court.id %>
+        </td>
+
+        <td>
+          <%= a_court.location_id %>
+        </td>
+
+        <td>
+          <%= a_court.reservations_count %>
+        </td>
+
+        <td>
+          <%= time_ago_in_words(a_court.created_at) %> ago
+        </td>
+        <td>
+          <%= time_ago_in_words(a_court.updated_at) %> ago
+        </td>
+
+        <td>
+          <a href="/courts/<%= a_court.id %>">
+            Show details
+          </a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
+
+<hr>

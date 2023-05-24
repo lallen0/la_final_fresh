@@ -2,6 +2,25 @@ Rails.application.routes.draw do
 
 
 
+  # Routes for the Court resource:
+
+  # CREATE
+  post("/insert_court", { :controller => "courts", :action => "create" })
+          
+  # READ
+  get("/courts", { :controller => "courts", :action => "index" })
+  
+  get("/courts/:path_id", { :controller => "courts", :action => "show" })
+  
+  # UPDATE
+  
+  post("/modify_court/:path_id", { :controller => "courts", :action => "update" })
+  
+  # DELETE
+  get("/delete_court/:path_id", { :controller => "courts", :action => "destroy" })
+
+  #------------------------------
+
   # Routes for the User account:
 
   # SIGN UP FORM
