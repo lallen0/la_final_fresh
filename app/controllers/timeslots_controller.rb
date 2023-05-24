@@ -25,8 +25,11 @@ class TimeslotsController < ApplicationController
     the_timeslot.available = params.fetch("query_available", false)
     the_timeslot.date = params.fetch("query_date")
     the_timeslot.time = params.fetch("query_time")
-    the_timeslot.reserver_id = params.fetch("query_reserver_id")
-    the_timeslot.reserved_at = params.fetch("query_reserved_at")
+    # the_timeslot.reserver_id = params.fetch("query_reserver_id")
+    # the_timeslot.reserved_at = params.fetch("query_reserved_at")
+
+    the_timeslot.reserver_id = NULL
+    the_timeslot.reserved_at = Time.now
 
     if the_timeslot.valid?
       the_timeslot.save
