@@ -44,6 +44,8 @@ Rails.application.routes.draw do
 
     # READ
   get("/users", { :controller => "user_authentication", :action => "index" })
+
+  get("/users/:path_id", { :controller => "user_authentication", :action => "show" })
   
 
   # SIGN UP FORM

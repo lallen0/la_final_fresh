@@ -96,4 +96,14 @@ class UserAuthenticationController < ApplicationController
 
     render({ :template => "user_authentication/index.html.erb" })
   end
+
+  def show
+    the_id = params.fetch("path_id")
+
+    matching_users = User.where({ :id => the_id })
+
+    @the_user = matching_users.at(0)
+
+    render({ :template => "user_authentication/show.html.erb" })
+  end
 end

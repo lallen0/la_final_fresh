@@ -1,0 +1,57 @@
+<div>
+  <div>
+    <h1>
+      Player #<%= @the_user.id %> details
+    </h1>
+
+    <div>
+      <div>
+        <a href="/users">
+          Go back
+        </a>
+      </div>
+
+    </div>
+
+      <dt>
+        First Name
+      </dt>
+      <dd>
+        <%= @the_user.first_name %>
+      </dd>
+
+      <dt>
+        Last Name
+      </dt>
+      <dd>
+        <%= @the_user.last_name %>
+      </dd>
+
+    <dl>
+      <dt>
+        Level
+      </dt>
+      <dd>
+        <%= @the_user.level %>
+      </dd>
+
+    <dl>
+      <dt>
+        Bio
+      </dt>
+      <dd>
+        <%= @the_user.bio %>
+      </dd>
+
+    </dl>
+  </div>
+</div>
+
+<hr>
+
+
+<div>
+    <h2>
+      List of Court Reservations
+    </h2>
+</div>
