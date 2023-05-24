@@ -41,8 +41,10 @@
           Time
         </label>
 
-        <input type="time" id="time_box" name="query_time" step="1800">
+        <input type="time" id="time_box" name="query_time" step="1800"></select>
       </div>
+
+
 
       <button>
         Create timeslot
@@ -86,6 +88,13 @@
         <th>
          Reserve? 
         </th>
+
+        <% if session[:user_id] == 1 %>
+        <th>
+         Delete Reservation
+        </th>
+        <% end %>
+
       </tr>
 
       <% @list_of_timeslots.each do |a_timeslot| %>
@@ -121,10 +130,26 @@
               Reserve this court
             </a>
           </td>
+
+        <% elsif a_timeslot.reserver_id == session[:user_id]  %>
+          <td>
+              <a href="/release_timeslot/<%= a_timeslot.id %>">
+              Release Reservation
+              </a>
+          </td>
+
         <% else %>
           <td>
               Not available
           </td>
+        <% end %>
+
+        <% if session[:user_id] == 1 %>
+        <td>
+            <a href="/delete_timeslot/<%= a_timeslot.id %>">
+              Delete
+            </a>
+        </td>
         <% end %>
 
       </tr>

@@ -88,6 +88,7 @@ Rails.application.routes.draw do
   
   post("/modify_timeslot/:path_id", { :controller => "timeslots", :action => "update" })
   get("/reserve_timeslot/:path_id", { :controller => "timeslots", :action => "reserve" })
+  get("/release_timeslot/:path_id", { :controller => "timeslots", :action => "release" })
   
   # DELETE
   get("/delete_timeslot/:path_id", { :controller => "timeslots", :action => "destroy" })
