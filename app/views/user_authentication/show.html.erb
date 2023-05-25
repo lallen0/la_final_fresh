@@ -50,8 +50,73 @@
 <hr>
 
 
-<div>
-    <h2>
-      List of Court Reservations
-    </h2>
-</div>
+<h2>List of <%= @the_user.first_name %>'s Court Reservations</h2>
+
+<table border="1">
+  <tr>
+    <th>
+      Court
+    </th>
+
+    <th>
+      Location
+    </th>
+
+    <th>
+      Date
+    </th>
+
+    <th>
+      Time
+    </th>
+
+
+    <th>
+      Reserved at
+    </th>
+
+<% if session[:user_id] == @the_user.id %>
+
+    <th>
+      Modify Reservation
+    </th>
+  <% end %>
+
+    <th></th>
+  </tr>
+
+  <% @the_user.reservations.each do |timeslot| %>
+  <tr>
+
+    <td>
+      <%= timeslot.court_id %>
+    </td>
+
+    <td>
+      <%= timeslot.court_id%>
+    </td>
+
+    <td>
+      <%= timeslot.date %>
+    </td>
+
+    <td>
+      <%= timeslot.time.strftime("%-l:%M %p")%>
+    </td>
+
+    <td>
+      <%= timeslot.reserved_at %>
+    </td>
+
+<% if session[:user_id] == @the_user.id %>
+
+    <td>
+              <a href="/release_timeslot_page/<%= timeslot.id %>">
+              Release Reservation
+      </a>
+    </td>
+  <% end %>
+  </tr>
+
+  <% end %>
+</table>

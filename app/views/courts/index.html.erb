@@ -8,6 +8,8 @@
 
 <hr>
 
+<% if session[:user_id] == 1 %>
+
 <div>
   <div>
     <h2>
@@ -23,14 +25,6 @@
         <input type="text" id="location_id_box" name="query_location_id">
       </div>
 
-      <div>
-        <label for="reservations_count_box">
-          Reservations count
-        </label>
-
-        <input type="text" id="reservations_count_box" name="query_reservations_count">
-      </div>
-
       <button>
         Create court
       </button>
@@ -38,32 +32,28 @@
   </div>
 </div>
 
+<% end %>
+
+
 <hr>
 <div>
   <div>
     <table border="1">
       <tr>
         <th>
-          ID
+          Court ID
         </th>
 
         <th>
-          Location
+          Location ID
         </th>
 
         <th>
-          Reservations count
+          Location Name
         </th>
 
         <th>
-          Created at
-        </th>
-
-        <th>
-          Updated at
-        </th>
-
-        <th>
+        Details
         </th>
       </tr>
 
@@ -74,18 +64,11 @@
         </td>
 
         <td>
-          <%= a_court.location_id %>
+          <%= a_court.location.id %>
         </td>
 
         <td>
-          <%= a_court.reservations_count %>
-        </td>
-
-        <td>
-          <%= time_ago_in_words(a_court.created_at) %> ago
-        </td>
-        <td>
-          <%= time_ago_in_words(a_court.updated_at) %> ago
+          <%= a_court.location.description %>
         </td>
 
         <td>

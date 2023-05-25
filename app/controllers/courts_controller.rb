@@ -2,7 +2,7 @@ class CourtsController < ApplicationController
   def index
     matching_courts = Court.all
 
-    @list_of_courts = matching_courts.order({ :created_at => :desc })
+    @list_of_courts = matching_courts.order({ :location_id => :asc })
 
     render({ :template => "courts/index.html.erb" })
   end
@@ -20,7 +20,7 @@ class CourtsController < ApplicationController
   def create
     the_court = Court.new
     the_court.location_id = params.fetch("query_location_id")
-    the_court.reservations_count = params.fetch("query_reservations_count")
+
 
     if the_court.valid?
       the_court.save
@@ -35,7 +35,7 @@ class CourtsController < ApplicationController
     the_court = Court.where({ :id => the_id }).at(0)
 
     the_court.location_id = params.fetch("query_location_id")
-    the_court.reservations_count = params.fetch("query_reservations_count")
+
 
     if the_court.valid?
       the_court.save
