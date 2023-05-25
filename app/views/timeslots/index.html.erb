@@ -1,7 +1,7 @@
 <div>
   <div>
     <h1>
-      List of all timeslots
+      Reserve a Court
     </h1>
   </div>
 </div>
@@ -55,8 +55,46 @@
 
      <% end %>
 
+<div>
+    <p>
+       
+    </p>
+</div>
+<div>
+    <h2>
+      Timeslot Calendar
+    </h2>
+</div>
+
+
+<%= month_calendar(events: @meetings) do |date, meetings| %>
+  <%= date.day.to_s %>
+
+<% meetings.each do |meeting| %>
+    <div class="<%= meeting.available ? 'text-green' : 'text-gray' %>">
+      <%= meeting.time.strftime("%-l:%M %p") %> 
+    | Court: <%= meeting.court_id %>
+
+      <% if meeting.available %>
+        <a href="/reserve_timeslot/<%= meeting.id %>">
+              Reserve
+      <% end %>
+
+    </div>
+  <% end %>
+
+<% end %>
+
+
 
 <hr>
+
+
+<div>
+    <h2>
+      List of All Timeslots
+    </h2>
+</div>
 <div>
   <div>
     <table class="table table-bordered" border="1">
@@ -161,21 +199,3 @@
 </div>
 
 <hr>
-
-<%= month_calendar(events: @meetings) do |date, meetings| %>
-  <%= date.day.to_s %>
-
-<% meetings.each do |meeting| %>
-    <div class="<%= meeting.available ? 'text-green' : 'text-gray' %>">
-      <%= meeting.time.strftime("%-l:%M %p") %> 
-    | Court: <%= meeting.court_id %>
-
-      <% if meeting.available %>
-        <a href="/reserve_timeslot/<%= meeting.id %>">
-              Reserve
-      <% end %>
-
-    </div>
-  <% end %>
-
-<% end %>
