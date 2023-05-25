@@ -45,7 +45,6 @@ class UserAuthenticationController < ApplicationController
     @user.first_name = params.fetch("query_first_name")
     @user.last_name = params.fetch("query_last_name")
     @user.bio = params.fetch("query_bio")
-    @user.reservations_count = params.fetch("query_reservations_count")
 
     save_status = @user.save
 
