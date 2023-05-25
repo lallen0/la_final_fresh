@@ -59,7 +59,7 @@
 <hr>
 <div>
   <div>
-    <table border="1">
+    <table class="table table-bordered" border="1">
       <tr>
         <th>
           Timeslot ID
@@ -98,7 +98,9 @@
       </tr>
 
       <% @list_of_timeslots.each do |a_timeslot| %>
+
       <tr>
+
         <td>
           <%= a_timeslot.id %>
         </td>
@@ -125,21 +127,21 @@
         </td>
 
         <% if a_timeslot.available %>
-          <td>
+          <td class="table-success">
             <a href="/reserve_timeslot/<%= a_timeslot.id %>">
               Reserve this court
             </a>
           </td>
 
         <% elsif a_timeslot.reserver_id == session[:user_id]  %>
-          <td>
+          <td class="table-primary">
               <a href="/release_timeslot/<%= a_timeslot.id %>">
               Release Reservation
               </a>
           </td>
 
         <% else %>
-          <td>
+          <td class="table-secondary">
               Not available
           </td>
         <% end %>
