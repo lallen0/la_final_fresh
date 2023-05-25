@@ -55,6 +55,12 @@
         <th>
         Details
         </th>
+
+        <% if session[:user_id] == 1 %>
+        <th>
+        Delete Court
+        </th>
+        <% end %>
       </tr>
 
       <% @list_of_courts.each do |a_court| %>
@@ -76,6 +82,16 @@
             Show details
           </a>
         </td>
+
+        <% if session[:user_id] == 1 %>
+        <td>
+          <a href="/delete_court/<%= a_court.id %>">
+            Delete Court
+          </a>
+        </td>
+        <% end %>
+
+
       </tr>
       <% end %>
     </table>

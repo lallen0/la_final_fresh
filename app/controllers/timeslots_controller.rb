@@ -73,44 +73,51 @@ class TimeslotsController < ApplicationController
     the_timeslot.reserver_id = session[:user_id]
     the_timeslot.reserved_at = Time.now
 
-    if the_timeslot.valid?
+    if URI.parse(request.referer).path == "/timeslots"
+      if the_timeslot.valid?
+        the_timeslot.save
+        redirect_to("/timeslots", { :notice => "Timeslot reserved successfully." })
+      else
+        redirect_to("/timeslots", { :alert => the_timeslot.errors.full_messages.to_sentence })
+      end
+    elsif the_timeslot.valid?
       the_timeslot.save
-      redirect_to("/timeslots", { :notice => "Timeslot reserved successfully." })
+      redirect_to("/courts/#{the_timeslot.court_id}", { :notice => "Timeslot reserved successfully." })
     else
-      redirect_to("/timeslots", { :alert => the_timeslot.errors.full_messages.to_sentence })
+      redirect_to("/courts/#{the_timeslot.court_id}", { :alert => the_timeslot.errors.full_messages.to_sentence })
     end
   end
 
   def release
     the_id = params.fetch("path_id")
     the_timeslot = Timeslot.where({ :id => the_id }).at(0)
-
-    the_timeslot.available = true
-    the_timeslot.reserver_id = nil
-    the_timeslot.reserved_at = Time.now
-
-    if the_timeslot.valid?
-      the_timeslot.save
-      redirect_to("/timeslots", { :notice => "Timeslot released successfully." })
-    else
-      redirect_to("/timeslots", { :alert => the_timeslot.errors.full_messages.to_sentence })
-    end
-  end
-
-  def release_page
-    the_id = params.fetch("path_id")
     user_id = session[:user_id]
-    the_timeslot = Timeslot.where({ :id => the_id }).at(0)
 
     the_timeslot.available = true
     the_timeslot.reserver_id = nil
     the_timeslot.reserved_at = Time.now
 
-    if the_timeslot.valid?
-      the_timeslot.save
-      redirect_to("/users/#{user_id}", { :notice => "Timeslot released successfully." })
-    else
-      redirect_to("/users#{user_id}", { :alert => the_timeslot.errors.full_messages.to_sentence })
+    if URI.parse(request.referer).path == "/timeslots"
+      if the_timeslot.valid?
+        the_timeslot.save
+        redirect_to("/timeslots", { :notice => "Timeslot released successfully." })
+      else
+        redirect_to("/timeslots", { :alert => the_timeslot.errors.full_messages.to_sentence })
+      end
+    elsif URI.parse(request.referer).path == "/users/#{user_id}"
+      if the_timeslot.valid?
+        the_timeslot.save
+        redirect_to("/users/#{user_id}", { :notice => "Timeslot released successfully." })
+      else
+        redirect_to("/users#{user_id}", { :alert => the_timeslot.errors.full_messages.to_sentence })
+      end
+    elsif URI.parse(request.referer).path == "/courts/#{the_timeslot.court_id}"
+      if the_timeslot.valid?
+        the_timeslot.save
+        redirect_to("/courts/#{the_timeslot.court_id}", { :notice => "Timeslot released successfully." })
+      else
+        redirect_to("/courts#{the_timeslot.court_id}", { :alert => the_timeslot.errors.full_messages.to_sentence })
+      end
     end
   end
 end

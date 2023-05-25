@@ -11,11 +11,6 @@
         </a>
       </div>
 
-      <div>
-        <a href="/delete_court/<%= @the_court.id %>">
-          Delete court
-        </a>
-      </div>
     </div>
 
     <dl>
@@ -53,34 +48,73 @@
 <hr>
 
 
-<div>
-  <div>
-    <h2>
-      Edit court
-    </h2>
+<h2>List of Reservations at Court# <%= @the_court.id %></h2>
 
-    <form action="/modify_court/<%= @the_court.id %>"  method="post" >
-      <div>
-        <label for="location_id_box">
-          Location
-        </label>
+<table border="1">
+  <tr>
+    <th>
+      Date
+    </th>
 
-        <input type="text" id="location_id_box" name="query_location_id" value="<%= @the_court.location_id %>">
-      </div>
+    <th>
+      Time
+    </th>
 
-      <div>
-        <label for="reservations_count_box">
-          Reservations count
-        </label>
+    <th>
+      Reserver
+    </th>
 
-        <input type="text" id="reservations_count_box" name="query_reservations_count" value="<%= @the_court.reservations_count %>">
-      </div>
+    <th>
+      Available
+    </th>
 
-      <button>
-        Update court
-      </button>
-    </form>
-  </div>
-</div>
+    <th>
+      Modify Reservation
+    </th>
 
-<hr>
+  </tr>
+
+  <% @the_court.reservations.each do |timeslot| %>
+  <tr>
+
+    <td>
+      <%= timeslot.date %>
+    </td>
+
+    <td>
+      <%= timeslot.time.strftime("%-l:%M %p")%>
+    </td>
+
+    <td>
+      <%= timeslot.reserver_id %>
+    </td>
+
+    <td>
+      <%= timeslot.available %>
+    </td>
+
+<% if timeslot.available == TRUE %>
+
+      <td>
+              <a href="/reserve_timeslot/<%= timeslot.id %>">
+              Reserve
+      </a>
+    </td>
+
+<% elsif session[:user_id] == timeslot.reserver_id %>
+
+    <td>
+              <a href="/release_timeslot/<%= timeslot.id %>">
+              Release Reservation
+      </a>
+    </td>
+     <% else %>
+    <td>
+      Already Reserved
+    </td>
+  <% end %>
+ 
+  </tr>
+
+  <% end %>
+</table>

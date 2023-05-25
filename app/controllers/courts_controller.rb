@@ -21,7 +21,6 @@ class CourtsController < ApplicationController
     the_court = Court.new
     the_court.location_id = params.fetch("query_location_id")
 
-
     if the_court.valid?
       the_court.save
       redirect_to("/courts", { :notice => "Court created successfully." })
@@ -36,10 +35,9 @@ class CourtsController < ApplicationController
 
     the_court.location_id = params.fetch("query_location_id")
 
-
     if the_court.valid?
       the_court.save
-      redirect_to("/courts/#{the_court.id}", { :notice => "Court updated successfully."} )
+      redirect_to("/courts/#{the_court.id}", { :notice => "Court updated successfully." })
     else
       redirect_to("/courts/#{the_court.id}", { :alert => the_court.errors.full_messages.to_sentence })
     end
@@ -51,6 +49,6 @@ class CourtsController < ApplicationController
 
     the_court.destroy
 
-    redirect_to("/courts", { :notice => "Court deleted successfully."} )
+    redirect_to("/courts", { :notice => "Court deleted successfully." })
   end
 end
