@@ -2,7 +2,7 @@ class TimeslotsController < ApplicationController
   def index
     matching_timeslots = Timeslot.all
 
-    @list_of_timeslots = matching_timeslots.order({ :created_at => :desc })
+    @list_of_timeslots = matching_timeslots.order({ :court_id => :asc, :date => :asc, :time => :asc })
     @meetings = matching_timeslots.order({ :created_at => :desc })
 
     render({ :template => "timeslots/index.html.erb" })
@@ -125,5 +125,23 @@ class TimeslotsController < ApplicationController
       end
     end
   end
+
+
+
+  def time_options
+    minutes = ["00", "30"]
+    hours = (0..23).to_a.map { |h| h.to_s.rjust(2, '0') }
+  
+    time_options = []
+  
+    hours.each do |hour|
+      minutes.each do |minute|
+        time_options << ["#{hour}:#{minute}", "#{hour}:#{minute}"]
+      end
+    end
+  
+    @time_options = time_options
+  end
+
 
 end

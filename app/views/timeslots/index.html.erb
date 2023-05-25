@@ -42,8 +42,8 @@
         </label>
 
         <input type="time" id="time_box" name="query_time" step="1800"></select>
-      </div>
 
+      </div>
 
 
       <button>
@@ -67,17 +67,21 @@
 </div>
 
 
-<%= month_calendar(events: @meetings) do |date, meetings| %>
+<%= month_calendar(events: @meetings, header_class: 'calendar-header') do |date, meetings| %>
   <%= date.day.to_s %>
 
 <% meetings.each do |meeting| %>
     <div class="<%= meeting.available ? 'text-green' : 'text-gray' %>">
-      <%= meeting.time.strftime("%-l:%M %p") %> 
-    | Court: <%= meeting.court_id %>
 
-      <% if meeting.available %>
+    <% if meeting.available %>
         <a href="/reserve_timeslot/<%= meeting.id %>">
-              Reserve
+              <%= meeting.time.strftime("%-l:%M %p") %> 
+    | Court: <%= meeting.court_id %>
+    (click to reserve)
+    <% else %>
+          <%= meeting.time.strftime("%-l:%M %p") %> 
+    | Court: <%= meeting.court_id %> (reserved)
+
       <% end %>
 
     </div>
@@ -92,16 +96,13 @@
 
 <div>
     <h2>
-      List of All Timeslots
+      Timeslots by Court
     </h2>
 </div>
 <div>
   <div>
     <table class="table table-bordered" border="1">
       <tr>
-        <th>
-          Timeslot ID
-        </th>
 
         <th>
           Court
@@ -120,7 +121,11 @@
         </th>
 
         <th>
-          Reserver
+          Reserver ID
+        </th>
+
+        <th>
+          Reserver Name
         </th>
 
         <th>
@@ -140,10 +145,6 @@
       <tr>
 
         <td>
-          <%= a_timeslot.id %>
-        </td>
-
-        <td>
           <%= a_timeslot.court_id %>
         </td>
 
@@ -156,13 +157,29 @@
           <%= a_timeslot.time.strftime("%-l:%M %p") %>
         </td>
 
+        <% if a_timeslot.available %>
         <td>
-          <%= a_timeslot.available %>
+          Yes 
         </td>
+        <% else %>
+        <td>
+        No
+        </td>
+        <% end %>
 
         <td>
           <%= a_timeslot.reserver_id %>
         </td>
+
+        <% if a_timeslot.available == false %>
+        <td>
+          <%= a_timeslot.reserver.first_name %> <%= a_timeslot.reserver.last_name %> 
+        </td>
+        <% else %>
+        <td>
+
+        </td>
+        <% end %>
 
         <% if a_timeslot.available %>
           <td class="table-success">
