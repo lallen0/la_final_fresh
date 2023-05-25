@@ -5,7 +5,9 @@
 #  id          :integer          not null, primary key
 #  available   :boolean
 #  date        :date
+#  end_time    :datetime
 #  reserved_at :datetime
+#  start_time  :datetime
 #  time        :time
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null

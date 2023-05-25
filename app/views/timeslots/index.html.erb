@@ -162,10 +162,14 @@
 
 <hr>
 
-<%= month_calendar do |date| %>
+<%= month_calendar(events: @meetings) do |date, meetings| %>
   <%= date.day.to_s %>
+
+<% meetings.each do |meeting| %>
+    <div>
+      <%= meeting.time.strftime("%-l:%M %p") %> 
+    | Court: <%= meeting.court_id %>
+    </div>
+  <% end %>
+
 <% end %>
-
-
-
-

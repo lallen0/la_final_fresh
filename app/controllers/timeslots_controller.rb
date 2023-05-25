@@ -3,6 +3,7 @@ class TimeslotsController < ApplicationController
     matching_timeslots = Timeslot.all
 
     @list_of_timeslots = matching_timeslots.order({ :created_at => :desc })
+    @meetings = matching_timeslots.order({ :created_at => :desc })
 
     render({ :template => "timeslots/index.html.erb" })
   end
@@ -23,6 +24,10 @@ class TimeslotsController < ApplicationController
     the_timeslot.available = params.fetch("query_available", true)
     the_timeslot.date = params.fetch("query_date")
     the_timeslot.time = params.fetch("query_time")
+    date = Date.parse(params.fetch("query_date"))
+    time = Time.parse(params.fetch("query_time"))
+    the_timeslot.start_time = DateTime.new(date.year, date.month, date.day, time.hour, time.min, time.sec, time.zone)
+    the_timeslot.end_time = DateTime.new(date.year, date.month, date.day, time.hour, time.min, time.sec, time.zone) + 1.hour
     # the_timeslot.reserver_id = params.fetch("query_reserver_id")
     # the_timeslot.reserved_at = params.fetch("query_reserved_at")
 
@@ -120,4 +125,5 @@ class TimeslotsController < ApplicationController
       end
     end
   end
+
 end
