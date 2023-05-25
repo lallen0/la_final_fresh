@@ -15,4 +15,10 @@
 
  @import "simple_calendar";
 
- 
+ .text-green {
+  color: green;
+}
+
+.text-gray {
+  color: gray;
+}

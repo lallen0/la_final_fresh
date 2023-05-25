@@ -166,9 +166,15 @@
   <%= date.day.to_s %>
 
 <% meetings.each do |meeting| %>
-    <div>
+    <div class="<%= meeting.available ? 'text-green' : 'text-gray' %>">
       <%= meeting.time.strftime("%-l:%M %p") %> 
     | Court: <%= meeting.court_id %>
+
+      <% if meeting.available %>
+        <a href="/reserve_timeslot/<%= meeting.id %>">
+              Reserve
+      <% end %>
+
     </div>
   <% end %>
 
