@@ -17,10 +17,12 @@
 
  .text-green {
   color: green;
+  font-size: 14px;
 }
 
 .text-gray {
   color: gray;
+  font-size: 14px;
 }
 
 .calendar-header {

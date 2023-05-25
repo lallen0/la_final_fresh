@@ -18,29 +18,10 @@
         Location
       </dt>
       <dd>
-        <%= @the_court.location_id %>
+        <%= @the_court.location.description %>
       </dd>
 
-      <dt>
-        Reservations count
-      </dt>
-      <dd>
-        <%= @the_court.reservations_count %>
-      </dd>
 
-      <dt>
-        Created at
-      </dt>
-      <dd>
-        <%= time_ago_in_words(@the_court.created_at) %> ago
-      </dd>
-
-      <dt>
-        Updated at
-      </dt>
-      <dd>
-        <%= time_ago_in_words(@the_court.updated_at) %> ago
-      </dd>
     </dl>
   </div>
 </div>
@@ -48,9 +29,9 @@
 <hr>
 
 
-<h2>List of Reservations at Court# <%= @the_court.id %></h2>
+<h2>List of Timeslots at Court# <%= @the_court.id %></h2>
 
-<table border="1">
+<table class="table table-bordered" border="1">
   <tr>
     <th>
       Date
@@ -61,7 +42,11 @@
     </th>
 
     <th>
-      Reserver
+      Reserver ID 
+    </th>
+
+    <th>
+      Reserver Name 
     </th>
 
     <th>
@@ -89,6 +74,15 @@
       <%= timeslot.reserver_id %>
     </td>
 
+  <% if timeslot.available == false %>
+    <td>
+      <%= timeslot.reserver.first_name %> <%= timeslot.reserver.last_name %>
+    </td>
+  <% else %>
+    <td>
+
+    </td>
+  <% end %>
     <td>
       <%= timeslot.available %>
     </td>

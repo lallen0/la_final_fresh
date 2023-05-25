@@ -1,7 +1,7 @@
 <div>
   <div>
     <h1>
-      Location #<%= @the_location.id %> details
+      <%= @the_location.description %> Details
     </h1>
 
     <div>
@@ -11,16 +11,11 @@
         </a>
       </div>
 
-      <div>
-        <a href="/delete_location/<%= @the_location.id %>">
-          Delete location
-        </a>
-      </div>
     </div>
 
     <dl>
       <dt>
-        Description
+        Name
       </dt>
       <dd>
         <%= @the_location.description %>
@@ -33,54 +28,6 @@
         <%= @the_location.courts_count %>
       </dd>
 
-      <dt>
-        Created at
-      </dt>
-      <dd>
-        <%= time_ago_in_words(@the_location.created_at) %> ago
-      </dd>
-
-      <dt>
-        Updated at
-      </dt>
-      <dd>
-        <%= time_ago_in_words(@the_location.updated_at) %> ago
-      </dd>
     </dl>
   </div>
 </div>
-
-<hr>
-
-
-<div>
-  <div>
-    <h2>
-      Edit location
-    </h2>
-
-    <form action="/modify_location/<%= @the_location.id %>"  method="post" >
-      <div>
-        <label for="description_box">
-          Description
-        </label>
-
-        <input type="text" id="description_box" name="query_description" value="<%= @the_location.description %>">
-      </div>
-
-      <div>
-        <label for="courts_count_box">
-          Courts count
-        </label>
-
-        <input type="text" id="courts_count_box" name="query_courts_count" value="<%= @the_location.courts_count %>">
-      </div>
-
-      <button>
-        Update location
-      </button>
-    </form>
-  </div>
-</div>
-
-<hr>

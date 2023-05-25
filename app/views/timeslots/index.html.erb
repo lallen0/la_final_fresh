@@ -62,7 +62,7 @@
 </div>
 <div>
     <h2>
-      Timeslot Calendar
+      Timeslot Calendar (Click to Reserve Available Courts)
     </h2>
 </div>
 
@@ -72,18 +72,19 @@
 
 <% meetings.each do |meeting| %>
     <div class="<%= meeting.available ? 'text-green' : 'text-gray' %>">
-
+   
     <% if meeting.available %>
         <a href="/reserve_timeslot/<%= meeting.id %>">
               <%= meeting.time.strftime("%-l:%M %p") %> 
-    | Court: <%= meeting.court_id %>
-    (click to reserve)
+        @ <%= meeting.court.location.description %>
+
+
     <% else %>
           <%= meeting.time.strftime("%-l:%M %p") %> 
-    | Court: <%= meeting.court_id %> (reserved)
+    @ <%= meeting.court.location.description %> (reserved)
 
       <% end %>
-
+    
     </div>
   <% end %>
 
@@ -103,6 +104,9 @@
   <div>
     <table class="table table-bordered" border="1">
       <tr>
+        <th>
+          Location
+        </th>
 
         <th>
           Court
@@ -143,6 +147,11 @@
       <% @list_of_timeslots.each do |a_timeslot| %>
 
       <tr>
+
+        <td>
+          <%= a_timeslot.court.location.description %>
+        </td>
+
 
         <td>
           <%= a_timeslot.court_id %>
